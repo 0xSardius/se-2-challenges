@@ -14,6 +14,8 @@ contract Staker {
 
   event Stake(address indexed sender, uint256 amount);
 
+  // takes in eth and stores it in the contract
+  // emits a Stake event
   function stake() public payable {
     require(msg.value > 0, "You must stake more than 0");
     balances[msg.sender] += msg.value;
