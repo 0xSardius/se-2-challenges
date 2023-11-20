@@ -8,6 +8,20 @@ contract Staker {
 
   ExampleExternalContract public exampleExternalContract;
 
+  mapping (address => uint256) public balances;
+
+  uint256 public constant threshold = 1 ether;
+
+  event Stake(address indexed sender, uint256 amount);
+
+  function stake() public payable {
+    require(msg.value > 0, "You must stake more than 0");
+    balances[msg.sender] += msg.value;
+    emit Stake(msg.sender, msg.value);
+  }
+
+
+
   constructor(address exampleExternalContractAddress) {
       exampleExternalContract = ExampleExternalContract(exampleExternalContractAddress);
   }
